@@ -55,3 +55,14 @@ def apagar_concerto_view(request, concerto_id):
         concerto.delete()
 
     return redirect('dias')
+
+def criar_concerto(request):
+    if request.method == 'POST':
+        form = ConcertoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_concertos') 
+    else:
+        form = ConcertoForm()
+
+    return render(request, 'festival/criar_concerto.html', {'form': form})    
